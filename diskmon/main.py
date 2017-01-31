@@ -1,4 +1,5 @@
 import psutil
+from prettytable import PrettyTable
 
 
 def getdiskinfo():
@@ -12,7 +13,11 @@ def getdiskinfo():
 			pass
 
 	return disks
-	
 
+table = PrettyTable(['Drive','Freespace'])
 drives = getdiskinfo()
-print(str(drives))
+for drive in drives:
+	table.add_row([drive,drives[drive]])
+	
+table.sortby =  'Freespace'	
+print(table)
